@@ -1,9 +1,12 @@
-package com.aip.datastructures.graph;
+package com.aip.datastructures.helpers;
+
+import com.aip.datastructures.graph.NodeInfo;
+import com.aip.datastructures.graph.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphHelper {
+public class Helper {
     public static List<Pair>[] createAdjList(List<NodeInfo> nodeInfoList, int vertex) {
         List<Pair>[] adjList = new List[vertex];
         for (NodeInfo nodeInfo : nodeInfoList) {
@@ -21,5 +24,11 @@ public class GraphHelper {
         }
 
         return adjList;
+    }
+
+    public static void swap(int[] nums, int i, int pIndex) {
+        int temp = nums[i];
+        nums[i] = nums[pIndex];
+        nums[pIndex] = temp;
     }
 }

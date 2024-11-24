@@ -3,7 +3,7 @@ package com.aip.datastructures;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Sort {
+public class Sortss {
     public static void main(String[] args) {
         MergeSort mergeSort = new MergeSort();
         QuickSort quickSort = new QuickSort();

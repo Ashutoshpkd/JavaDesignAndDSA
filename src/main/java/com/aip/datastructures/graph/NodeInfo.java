@@ -1,9 +1,9 @@
 package com.aip.datastructures.graph;
 
 public class NodeInfo {
-    int e1;
-    int e2;
-    int w;
+    public int e1;
+    public int e2;
+    public int w;
 
     public NodeInfo(int e1, int e2, int w) {
         this.e1 = e1;

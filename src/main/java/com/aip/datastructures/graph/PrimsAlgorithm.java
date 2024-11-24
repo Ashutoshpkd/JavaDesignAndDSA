@@ -1,11 +1,13 @@
 package com.aip.datastructures.graph;
 
+import com.aip.datastructures.helpers.Helper;
+
 import java.util.*;
 
 public class PrimsAlgorithm {
 
     public void minimumSpanningTree(List<NodeInfo> nodeInfoList, int vertex) {
-        List<Pair>[] adjList = GraphHelper.createAdjList(nodeInfoList, vertex);
+        List<Pair>[] adjList = Helper.createAdjList(nodeInfoList, vertex);
         System.out.println(Arrays.toString(adjList));
 
         Queue<Pair> minQ = new PriorityQueue<>(Comparator.comparingInt(p -> p.p2));

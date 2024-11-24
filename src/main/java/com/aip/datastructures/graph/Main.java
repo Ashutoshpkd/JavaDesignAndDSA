@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         PrimsAlgorithm primsAlgorithm = new PrimsAlgorithm();
         DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm();
+        TopologicalSort tps = new TopologicalSort();
 
         List<NodeInfo> nodeInfoList = new ArrayList<>();
         nodeInfoList.add(new NodeInfo(0, 1, 2));
@@ -31,5 +32,7 @@ public class Main {
         System.out.println(Arrays
                 .toString(dijkstraAlgorithm
                         .getShortestDistanceToReachAllNodes(nodeInfoListDijkstra, 0, 4)));
+
+        System.out.println("Topological sort: " + Arrays.toString(tps.topologicalSort(nodeInfoList, 5)));
     }
 }

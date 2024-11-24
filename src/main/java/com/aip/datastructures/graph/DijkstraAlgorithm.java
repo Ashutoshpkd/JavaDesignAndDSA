@@ -1,10 +1,12 @@
 package com.aip.datastructures.graph;
 
+import com.aip.datastructures.helpers.Helper;
+
 import java.util.*;
 
 public class DijkstraAlgorithm {
     public int[] getShortestDistanceToReachAllNodes(List<NodeInfo> nodeInfoList, int srcNode, int numVertex) {
-        List<Pair>[] adjList = GraphHelper.createAdjList(nodeInfoList, numVertex);
+        List<Pair>[] adjList = Helper.createAdjList(nodeInfoList, numVertex);
         int[] minDist = new int[numVertex];
         Queue<Pair> minQ = new PriorityQueue<>(Comparator.comparingInt(p -> p.p2));
         Arrays.fill(minDist, Integer.MAX_VALUE);
