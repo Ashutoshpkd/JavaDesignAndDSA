@@ -1,15 +1,17 @@
 package com.aip;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 //        Input:
 //
 //        Output: 98 7654 321
+
+        char[] board = new char[] {'.', '.', 'Q'};
+        System.out.println(String.valueOf(board));
+        List<String> boards = new ArrayList<>();
+        boards.add(String.valueOf(board));
 
         System.out.println(reverse("12 3456 789"));
         System.out.println(convertToInt("4567"));

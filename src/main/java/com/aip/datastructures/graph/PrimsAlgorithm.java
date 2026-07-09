@@ -8,7 +8,6 @@ public class PrimsAlgorithm {
 
     public void minimumSpanningTree(List<NodeInfo> nodeInfoList, int vertex) {
         List<Pair>[] adjList = Helper.createAdjList(nodeInfoList, vertex);
-        System.out.println(Arrays.toString(adjList));
 
         Queue<Pair> minQ = new PriorityQueue<>(Comparator.comparingInt(p -> p.p2));
         int[] minCost = new int[vertex];
@@ -41,8 +40,8 @@ public class PrimsAlgorithm {
                 }
             }
         }
-        System.out.println(Arrays.toString(parent));
-        System.out.println(Arrays.toString(minCost));
+        System.out.println("Prim's parent array: " + Arrays.toString(parent));
+        System.out.println("Prim's minCost array: " + Arrays.toString(minCost));
 
     }
 }

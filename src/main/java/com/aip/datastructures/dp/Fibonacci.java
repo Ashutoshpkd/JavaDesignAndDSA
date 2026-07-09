@@ -1,11 +1,21 @@
 package com.aip.datastructures.dp;
 
+import java.time.LocalTime;
+
 public class Fibonacci {
     public static void main(String[] args) {
+
         int fib = 7;
+        DP dpc = new DP();
+        long millis = System.currentTimeMillis();
+        StoneGame sg = new StoneGame();
         Integer dp[] = new Integer[fib + 1];
+        StringBuilder sb = new StringBuilder();
+
         System.out.println("Fib " + fib + " : " + getNthFibonacciNumber(fib, dp));
         System.out.println("Fib True DP of " + fib + " : " + trueDp(fib));
+        System.out.println(dpc.ways(10));
+        System.out.println(sg.lastStoneWeightII(new int[] {1,1,2,3,5,8,13,21,34,55,89,14,23,37,61,98}));
     }
 
     private static int getNthFibonacciNumber(int n, Integer[] dp) {

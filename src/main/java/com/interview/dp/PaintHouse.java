@@ -20,22 +20,22 @@ public class PaintHouse {
         return memo[idx][currHouse] = minCost;
     }
 
-    public int minCostPractice(int[][] costs) {
-        return helperPractice(costs, 0, 0, new Integer[4][costs.length]);
+    public int minCostPractice(int[][] cost) {
+        return dfs(cost, 0, -1);
     }
 
-    private int helperPractice(int[][] costs, int idx, int houseNum, Integer[][] memo) {
-        if (idx >= costs.length) return 0;
-        if (memo[houseNum][idx] != null) return memo[houseNum][idx];
+    private int dfs(int[][] cost, int idx, int prevIdx) {
+        if (idx >= cost.length) return 0;
 
+        int[] price = cost[idx];
         int minCost = Integer.MAX_VALUE;
 
         for (int i=0; i<3; i++) {
-            if (i != houseNum - 1) {
-                minCost = Math.min(minCost, costs[idx][i] + helperPractice(costs, idx + 1, i + 1, memo));
+            if (i != prevIdx) {
+                minCost = Math.min(price[i] + dfs(cost, idx + 1, i), minCost);
             }
         }
 
-        return memo[houseNum][idx] = minCost;
+        return minCost;
     }
 }

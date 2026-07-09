@@ -2,10 +2,7 @@ package com.aip.datastructures.graph;
 
 import com.aip.datastructures.helpers.Helper;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 public class TopologicalSort {
 

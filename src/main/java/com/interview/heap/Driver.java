@@ -51,5 +51,17 @@ public class Driver {
         int[] p = new int[] {5,6,10,4,3,9};
         heapSort.sortPractice(p);
         System.out.println(Arrays.toString(p));
+
+
+        MaxHeap heap = new MaxHeap();
+        heap.insert(1);
+        heap.insert(3);
+        heap.insert(2);
+
+        System.out.println(heap.getSize() + " : heap size");
+
+        while (heap.getSize() != 0) {
+            System.out.println(heap.poll());
+        }
     }
 }

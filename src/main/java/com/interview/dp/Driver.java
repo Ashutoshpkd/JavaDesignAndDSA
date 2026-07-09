@@ -4,7 +4,9 @@ public class Driver {
     public static void main(String[] args) {
         PaintHouse ph = new PaintHouse();
         System.out.println(ph.minCost(new int[][] {{14,2,11}, {11,14,5}, {14,3,10}}));
+        System.out.println(ph.minCostPractice(new int[][] {{14,2,11}, {11,14,5}, {14,3,10}}));
         System.out.println(ph.minCostPractice(new int[][] {{1,2,3}, {4,5,6}, {7,8,9}}));
+        System.out.println(ph.minCost(new int[][] {{1,2,3}, {4,5,6}, {7,8,9}}));
 
         MaxSubArrSumWithOneDeletion sumWithOneDeletion = new MaxSubArrSumWithOneDeletion();
         int[] arr = {1, -2, -2, 3};
