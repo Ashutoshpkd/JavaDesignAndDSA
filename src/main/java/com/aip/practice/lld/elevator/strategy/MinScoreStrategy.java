@@ -28,7 +28,7 @@ public class MinScoreStrategy implements SelectionStrategy {
         Elevator bestElevator = null;
 
         for (Elevator e : elevators) {
-            if (e.getDirection() == Direction.IDLE) {
+            if (e.getDirection() == Direction.IDLE && !e.hasPendingRequests()) {
                 int distance = Math.abs(floor - e.getCurrentFloor());
 
                 if (minDist > distance) {
@@ -63,17 +63,23 @@ public class MinScoreStrategy implements SelectionStrategy {
         Elevator bestElevator = null;
 
         for (Elevator e : elevators) {
-            if (reqDirection == Direction.UP && request.getFloor() > e.getCurrentFloor()) {
-                if (minDistance > (request.getFloor() - e.getCurrentFloor())) {
+            if (e.getDirection() != reqDirection) {
+                continue;
+            }
+
+            if (reqDirection == Direction.UP && request.getFloor() >= e.getCurrentFloor()) {
+                int distance = request.getFloor() - e.getCurrentFloor();
+                if (minDistance > distance) {
                     bestElevator = e;
-                    minDistance = (request.getFloor() - e.getCurrentFloor());
+                    minDistance = distance;
                 }
             }
 
-            if (reqDirection == Direction.DOWN && request.getFloor() < e.getCurrentFloor()) {
-                if (minDistance > (e.getCurrentFloor() - request.getFloor())) {
+            if (reqDirection == Direction.DOWN && request.getFloor() <= e.getCurrentFloor()) {
+                int distance = e.getCurrentFloor() - request.getFloor();
+                if (minDistance > distance) {
                     bestElevator = e;
-                    minDistance =  (e.getCurrentFloor() - request.getFloor());
+                    minDistance = distance;
                 }
             }
         }
@@ -83,7 +89,7 @@ public class MinScoreStrategy implements SelectionStrategy {
 
     private Elevator checkIdleAndIsOnSameFloor(List<Elevator> elevators, int floor) {
         for (Elevator e : elevators) {
-            if (e.getDirection() == Direction.IDLE && e.getCurrentFloor() == floor) return e;
+            if (e.getDirection() == Direction.IDLE && !e.hasPendingRequests() && e.getCurrentFloor() == floor) return e;
         }
 
         return null;

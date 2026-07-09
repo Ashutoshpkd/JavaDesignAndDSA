@@ -5,10 +5,3 @@ public enum Direction {
     DOWN,
     IDLE;
 }
-
-enum ElevatorStatus {
-    MAINTAINANCE,
-    MOVING,
-    STOPPED,
-    SERVED;
-}

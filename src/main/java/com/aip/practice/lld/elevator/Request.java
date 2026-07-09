@@ -37,5 +37,12 @@ public class Request {
     public int hashCode() {
         return Objects.hash(floor, requestType);
     }
-}
 
+    @Override
+    public String toString() {
+        return "Request{" +
+                "floor=" + floor +
+                ", requestType=" + requestType +
+                '}';
+    }
+}

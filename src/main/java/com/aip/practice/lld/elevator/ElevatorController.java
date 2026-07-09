@@ -5,10 +5,11 @@ import com.aip.practice.lld.elevator.strategy.SelectionStrategy;
 import java.util.List;
 
 public class ElevatorController {
-    private static int MAX_FLOOR = 9;
-    private static int MIN_FLOOR = 0;
-    private List<Elevator> elevators;
-    private SelectionStrategy strategy;
+    private static final int MAX_FLOOR = 9;
+    private static final int MIN_FLOOR = 0;
+
+    private final List<Elevator> elevators;
+    private final SelectionStrategy strategy;
 
     public ElevatorController(SelectionStrategy strategy, List<Elevator> elevators) {
         this.strategy = strategy;
@@ -16,19 +17,53 @@ public class ElevatorController {
     }
 
     public boolean handleHallCall(Request request) {
+        if (request == null || request.getRequestType() == null) return false;
+
         int requestedFloor = request.getFloor();
-        if (requestedFloor > MAX_FLOOR || requestedFloor < MIN_FLOOR) return false;
-        if (request.getRequestType() == null || request.getRequestType() == RequestType.DESTINATION) return false;
+        if (isInvalidFloor(requestedFloor)) return false;
+        if (request.getRequestType() == RequestType.DESTINATION) return false;
 
         Elevator elevator = strategy.getElevator(elevators, request);
+        if (elevator == null) return false;
 
-        return elevator.addRequest(request);
+        boolean isAdded = elevator.addRequest(request);
+        if (isAdded) {
+            System.out.println("Assigned " + request + " to elevator " + elevator.getId());
+        }
+
+        return isAdded;
+    }
+
+    public boolean handleDestinationRequest(int elevatorId, int destinationFloor) {
+        if (isInvalidFloor(destinationFloor)) return false;
+
+        for (Elevator elevator : elevators) {
+            if (elevator.getId() == elevatorId) {
+                boolean isAdded = elevator.handleDestinationRequest(destinationFloor);
+                if (isAdded) {
+                    System.out.println("Assigned destination floor " + destinationFloor + " to elevator " + elevatorId);
+                }
+                return isAdded;
+            }
+        }
+
+        return false;
     }
 
     public void step() throws InterruptedException {
-        for (int i=0; i<100; i++) {
+        step(100, 100);
+    }
+
+    public void step(int numberOfSteps, long pauseInMillis) throws InterruptedException {
+        for (int i = 0; i < numberOfSteps; i++) {
             elevators.forEach(Elevator::step);
-            Thread.sleep(100);
+            if (pauseInMillis > 0) {
+                Thread.sleep(pauseInMillis);
+            }
         }
+    }
+
+    private boolean isInvalidFloor(int floor) {
+        return floor > MAX_FLOOR || floor < MIN_FLOOR;
     }
 }
