@@ -17,29 +17,30 @@ import java.util.Map;
 
 public class RateLimiter {
 
-    private Map<String, Limiter> limiters;
-    private Limiter defaultLimiter;
+    private final Map<String, Limiter> limiters;
+    private final Limiter defaultLimiter;
 
     public RateLimiter(List<Map<String, Object>> configs, Map<String, Object> defaultConfig) {
-        this.limiters = new HashMap<>();
         this.defaultLimiter = LimiterFactory.create(defaultConfig);
+        Map<String, Limiter> configuredLimiters = new HashMap<>();
         for (Map<String, Object> config : configs) {
             String endpoint = (String) config.get("endpoint");
 
             if (endpoint == null) continue;
 
             Limiter limiter = LimiterFactory.create(config);
-            this.limiters.put(endpoint, limiter);
+            configuredLimiters.put(endpoint, limiter);
         }
+        this.limiters = Map.copyOf(configuredLimiters);
     }
 
-    public RateLimitingResponse allow(String cliendId, String endpoint) {
+    public RateLimitingResponse allow(String clientId, String endpoint) {
         Limiter limiter = limiters.get(endpoint);
 
         if (limiter == null) {
             limiter = defaultLimiter;
         }
 
-        return limiter.allow(cliendId);
+        return limiter.allow(clientId);
     }
 }
